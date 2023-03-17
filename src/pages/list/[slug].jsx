@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import styles from "./slug.module.css";
 
 export default function DetailPage() {
   const router = useRouter();
@@ -22,20 +23,20 @@ export default function DetailPage() {
   }, []);
 
   return (
-    <>
-      <ul>
+    <section className={styles.section}>
+      <ul className={styles.unlist}>
         {!listDetail && <h1>Loading...</h1>}
         {listDetail?.map((list) => (
-          <div key={list.rank}>
-            <img src={list.book_image} />
-            <h3>{list.title}</h3>
-            <h4>{list.contributor.slice(2)}</h4>
+          <div key={list.rank} className={styles.list}>
+            <img src={list.book_image} className={styles.img} />
+            <h3 className={styles.title}>{list.title}</h3>
+            <h4 className={styles.contributor}>{list.contributor.slice(2)}</h4>
             <a href={list.amazon_product_url} target='_blank'>
-              <button>Buy now</button>
+              <button className={styles.buyBtn}>Buy now</button>
             </a>
           </div>
         ))}
       </ul>
-    </>
+    </section>
   );
 }
